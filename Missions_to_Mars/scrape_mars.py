@@ -91,7 +91,7 @@ def scrape():
     #############################################################
     # Mars Facts - Scrape section                               #
     # Use pandas to read the html table data on the page into a list of dictionaries
-    tables = pd.read_html(url)
+    tables = pd.read_html(urls.facts)
 
     # Read the first dictionary in the list into a pandas dataframe and name columns
     df = tables[0]
@@ -106,6 +106,51 @@ def scrape():
     fact_table = fact_table.replace('\n', '')
  
 
+    #############################################################
+    # Mars Hemispheres - Scrape section                         #
+    # 
+    browser = init_browser()
+    browser.visit(urls.hemi)
+
+    # Get page html and make beautifulsoup object
+    html = browser.html
+    soup = BeautifulSoup(html, 'html.parser')
+
+    # Get the html containing the titles and put into a list
+    title_list = soup.find_all('div', class_='description')
+
+    # Loop through the div objects and scrape titles and urls of hires images
+    # Initiate the list to store dictionaries
+    hemisphere_image_urls = []
+    for title in title_list:
+        # Navigate browser to page then click on title link to hires image page
+        browser.visit(urls.hemi)
+        browser.click_link_by_partial_text(title.a.h3.text)
+
+        # Grab the destination page html and make into BeautifulSoup object
+        html = browser.html
+        soup = BeautifulSoup(html, 'html.parser')
+
+        # Parse the hires image source(src) relative url then append to domain name
+        # for absolute url 
+        img_url_list = soup.find('img', class_='wide-image')
+        img_url = f"https://astrogeology.usgs.gov{img_url_list['src']}"
+
+        # Create dictionary with returned values and add dict to hemisphere_image_urls list
+        post = {
+                'title': title.a.h3.text,
+                'image_url': img_url
+                }
+        hemisphere_image_urls.append(post)
+
+
+
+
+
+
+
+
+        
 
     html = browser.html
     soup = BeautifulSoup(html, "html.parser")
