@@ -71,16 +71,16 @@ def scrape():
     # Loop through returned results and match the first tweet that starts with 'Insight sol'
     for tweet in tweets:
     # Error handling if there is something wrong with the tweet
-    try:
-        # Create a regular expression to match the first phrase of a tweet about the weather
-        regex = '^InSight sol'
-        # Test is the tweet starts with the regex expression
-        if re.match(regex,tweet.text) is not None:
-            # capture the tweet and exit the for loop
-            weather_data = tweet.text
-            break
-    except AttributeError as e:
-        print(e)
+        try:
+            # Create a regular expression to match the first phrase of a tweet about the weather
+            regex = '^InSight sol'
+            # Test is the tweet starts with the regex expression
+            if re.match(regex,tweet.text) is not None:
+                # capture the tweet and exit the for loop
+                weather_data = tweet.text
+                break
+        except AttributeError as e:
+            print(e)
 
 
 
@@ -150,5 +150,5 @@ def scrape():
             'fact_table': fact_table,
             'hemisphere_image_urls': hemisphere_image_urls
     }
-
+    print(mars_data)
     return mars_data
