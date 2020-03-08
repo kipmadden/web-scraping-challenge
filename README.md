@@ -1,13 +1,13 @@
 # Web Scraping  - Mission to Mars
 
-![mission_to_mars](Mission_to_Mars/Images/mission_to_mars.png)
+![mission_to_mars](Missions_to_Mars/Images/mission_to_mars.png)
 
-A web application was built that scrapes various Mars related websites for data related to the Mission to Mars and displays the information in a single HTML page. The code to do the scraping is captured in a [Jupyter Notebook](Mission_to_Mars/mission_to_mars.ipynb). This code was revised and put into a python .py file named [scrape_mars.py](Mission_to_Mars/scrape_mars.py) in a function to be called upon by a flask [app.py](Mission_to_Mars/app.py) when a button is clicked on the website calling the /scrape path.
+A web application was built that scrapes various Mars related websites for data related to the Mission to Mars and displays the information in a single HTML page. The code to do the scraping is captured in a [Jupyter Notebook](Missions_to_Mars/mission_to_mars.ipynb). This code was revised and put into a python .py file named [scrape_mars.py](Missions_to_Mars/scrape_mars.py) in a function to be called upon by a flask [app.py](Missions_to_Mars/app.py) when a button is clicked on the website calling the /scrape path.
 
 
 ##  Scraping Mars data
 
-Initial scraping was completed using [Jupyter Notebook](Mission_to_Mars/mission_to_mars.ipynb) using BeautifulSoup, Pandas, and Requests/Splinter. The locations and types of data that were scraped follows.
+Initial scraping was completed using [Jupyter Notebook](Missions_to_Mars/mission_to_mars.ipynb) using BeautifulSoup, Pandas, and Requests/Splinter. The locations and types of data that were scraped follows.
 
 
 ### NASA Mars News
@@ -70,4 +70,4 @@ MongoDB with Flask templating was used to create a new HTML page that displays a
 
 The results that are rendered after clicking the "Scrape New Data" button is below:
 
-![screencapture.png](Mission_to_Mars/Images/screencapture.png)
+![screencapture.png](Missions_to_Mars/Images/screencapture.png)
