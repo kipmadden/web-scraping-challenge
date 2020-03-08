@@ -35,7 +35,11 @@ def scrape():
     #############################################################
     # NASA Mars News - Scrape section                           #
     # Get title and paragraph for latest article                #
-    request_soup(urls.news)
+    # Retrieve page with the requests module
+    response = requests.get(urls['news'])
+    # Create BeautifulSoup object; parse with 'html.parser'
+    soup = BeautifulSoup(response.text, 'html.parser')
+
     news_title = soup.find('div', class_="content_title").a.text.strip()
     news_paragraph = soup.find('div', class_="rollover_description_inner").text.strip()
 
@@ -46,7 +50,7 @@ def scrape():
     # Get the latest featured image title and image url         #
     # Initialize browser and navigate to page with hires image  #
     browser = init_browser()
-    browser.visit(urls.image)
+    browser.visit(urls['image'])
     browser.click_link_by_partial_text('FULL IMAGE')
     browser.click_link_by_partial_text('more info')
 
@@ -65,7 +69,11 @@ def scrape():
     #############################################################
     # Mars Weather - Scrape section                             #
     # Get weather tweets information from twitter                #
-    request_soup(urls.weather)
+        # Retrieve page with the requests module
+    response = requests.get(urls['weather'])
+    # Create BeautifulSoup object; parse with 'html.parser'
+    soup = BeautifulSoup(response.text, 'html.parser')
+
     tweets = soup.find_all('p', class_="TweetTextSize TweetTextSize--normal js-tweet-text tweet-text")
 
     # Loop through returned results and match the first tweet that starts with 'Insight sol'
@@ -87,7 +95,7 @@ def scrape():
     #############################################################
     # Mars Facts - Scrape section                               #
     # Use pandas to read the html table data on the page into a list of dictionaries
-    tables = pd.read_html(urls.facts)
+    tables = pd.read_html(urls['facts'])
 
     # Read the first dictionary in the list into a pandas dataframe and name columns
     df = tables[0]
@@ -106,7 +114,7 @@ def scrape():
     # Mars Hemispheres - Scrape section                         #
     # 
     browser = init_browser()
-    browser.visit(urls.hemi)
+    browser.visit(urls['hemi'])
 
     # Get page html and make beautifulsoup object
     html = browser.html
@@ -120,7 +128,7 @@ def scrape():
     hemisphere_image_urls = []
     for title in title_list:
         # Navigate browser to page then click on title link to hires image page
-        browser.visit(urls.hemi)
+        browser.visit(urls['hemi'])
         browser.click_link_by_partial_text(title.a.h3.text)
 
         # Grab the destination page html and make into BeautifulSoup object
