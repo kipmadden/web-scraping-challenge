@@ -31,10 +31,6 @@ def init_browser():
 
 def scrape():
 
-    # Initialize mars_data dictionary to hold all scraped values to be entered into mongo db
-    mars_data = {}
-
-
 
     #############################################################
     # NASA Mars News - Scrape section                           #
@@ -143,20 +139,16 @@ def scrape():
                 }
         hemisphere_image_urls.append(post)
 
+    
 
-
-
-
-
-
-
-        
-
-    html = browser.html
-    soup = BeautifulSoup(html, "html.parser")
-
-    mars_data["headline"] = soup.find("a", class_="result-title").get_text()
-    mars_data["price"] = soup.find("span", class_="result-price").get_text()
-    mars_data["hood"] = soup.find("span", class_="result-hood").get_text()
+    # Initialize mars_data dictionary to hold all scraped values to be entered into mongo db
+    mars_data = {
+            'news_title': news_title,
+            'news_paragraph': news_paragraph,
+            'featured_image_url': featured_image_url,
+            'weather_data': weather_data,
+            'fact_table': fact_table,
+            'hemisphere_image_urls': hemisphere_image_urls
+    }
 
     return mars_data
